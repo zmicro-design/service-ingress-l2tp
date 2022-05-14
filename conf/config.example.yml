@@ -1,0 +1,24 @@
+ssl:
+  - domain: example.com
+    cert:
+      certificate: /config/ssl/example.com/fullchain.pem
+      certificate_key: /config/ssl/example.com/privkey.pem
+
+waf:
+  whiteHosts:
+    - waf.example.com
+
+rules:
+  - host: portainer.example.com
+    backend:
+      serviceName: portainer
+      servicePort: 80
+  - host: docker-registry.example.com
+    backend:
+      serviceName: docker-registry
+      servicePort: 80
+    paths:
+      - path: /v2
+        backend:
+          serviceName: docker-registry-v2
+          servicePort: 80

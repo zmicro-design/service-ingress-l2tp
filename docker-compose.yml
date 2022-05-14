@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  ingress:
+    restart: always
+    image: whatwewant/open-ingress:${SERVICE_INGRESS_L2TP_VERSION}
+    ports:
+      - 0.0.0.0:${SERVICE_INGRESS_L2TP_HTTP_PORT}:80
+      - 0.0.0.0:${SERVICE_INGRESS_L2TP_HTTPS_PORT}:443
+    environment:
+      DOMAIN: ${SERVICE_INGRESS_L2TP_DOMAIN}
+      # MODE: debug
+      HTTPS: false
+      VPN_SERVER_IP: ${SERVICE_INGRESS_L2TP_VPN_SERVER}
+      VPN_USERNAME: ${SERVICE_INGRESS_L2TP_VPN_USERNAME}
+      VPN_PASSWORD: ${SERVICE_INGRESS_L2TP_VPN_PASSWORD}
+      VPN_IPSEC_PSK: ${SERVICE_INGRESS_L2TP_VPN_IPSEC_PSK}
+    privileged: true
+    volumes:
+      - ${SERVICE_CONFIGS}:/app/conf/config
+      - ${SERVICE_CONFIGS}/ssl:/config/ssl
+      - ${SERVICE_LOGS}/waf:/var/log/waf
+
+networks:
+  default:
+    external: true
+    name: ${SERVICE_NETWORK:-compose-ingress}
