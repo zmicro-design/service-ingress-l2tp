@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  ingress:
+  ingress-l2tp:
     restart: always
-    image: whatwewant/open-ingress:${SERVICE_INGRESS_L2TP_VERSION}
+    image: whatwewant/ingress-l2tp:${SERVICE_INGRESS_L2TP_VERSION}
     ports:
       - 0.0.0.0:${SERVICE_INGRESS_L2TP_HTTP_PORT}:80
       - 0.0.0.0:${SERVICE_INGRESS_L2TP_HTTPS_PORT}:443
