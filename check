@@ -6,6 +6,7 @@ check() {
   config::check_or_set SERVICE_INGRESS_L2TP_VPN_USERNAME text $SERVICE_CONFIG "请输入 VPN 用户名:"
   config::check_or_set SERVICE_INGRESS_L2TP_VPN_PASSWORD text $SERVICE_CONFIG "请输入 VPN 密码:"
   config::check_or_set SERVICE_INGRESS_L2TP_VPN_IPSEC_PSK text $SERVICE_CONFIG "请输入 VPN 共享密钥:"
+  config::check_or_set SERVICE_INGRESS_L2TP_HEALTH_CHECK_URL text $SERVICE_CONFIG "请输入健康检查 URL:"
 
   if [ ! -f $SERVICE_INGRESS_L2TP_CONFIG_ROUTER ]; then
     log::error "[ingress] please config ingress router in $SERVICE_INGRESS_L2TP_CONFIG_ROUTER"
